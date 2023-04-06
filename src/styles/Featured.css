@@ -1,4 +1,4 @@
-.bestsellers-section {
+.featured-section {
   height: 92vh;
   background-color: rgb(247, 246, 246);
   scroll-snap-align: start;
@@ -8,14 +8,14 @@
   flex-direction: column;
 }
 
-.bestsellers-title {
+.featured-title {
   margin-bottom: 10%;
   text-align: center;
   font-weight: 400;
   font-size: 1.5rem;
 }
 
-.bestseller-products {
+.featured-products {
   flex: 1;
   height: auto;
   display: grid;
@@ -25,7 +25,7 @@
   justify-items: center;
 }
 
-.bestseller-product {
+.featured-product {
   width: 90%;
   border: 1px solid black;
   padding: 5%;

@@ -1,0 +1,43 @@
+.info-section {
+  height: 92vh;
+  background-color: rgb(247, 246, 246);
+  scroll-snap-align: start;
+  scroll-margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-image {
+  background-image: url(../components/images/info-photo.jpg);
+  background-size: 120%;
+  background-position: center center;
+  flex: 1;
+}
+.info-content {
+  flex: 1;
+  background-color: #49680c;
+  color: rgb(247, 246, 246);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  padding: 8%;
+}
+
+.info-content-title {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.info-content-maxim {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.info-content-description {
+  font-size: 1.05rem;
+  text-justify: auto;
+  text-align: center;
+  margin-top: 10%;
+}

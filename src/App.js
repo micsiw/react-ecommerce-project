@@ -3,6 +3,8 @@ import "./styles/App.css";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Bestsellers from "./components/Bestsellers";
+import Info from "./components/Info";
+import Featured from "./components/Featured";
 
 function App() {
   // useEffect(() => {
@@ -23,6 +25,8 @@ function App() {
       <div className="main">
         <Hero />
         <Bestsellers />
+        <Info />
+        <Featured />
       </div>
     </div>
   );
