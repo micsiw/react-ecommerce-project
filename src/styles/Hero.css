@@ -4,6 +4,8 @@
   background-repeat: no-repeat;
   background-size: 180%;
   background-position: 60% center;
+  scroll-snap-align: start;
+  scroll-margin-top: 8vh;
 }
 
 .hero-content {

@@ -2,6 +2,7 @@
 import "./styles/App.css";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import Bestsellers from "./components/Bestsellers";
 
 function App() {
   // useEffect(() => {
@@ -19,7 +20,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Hero />
+      <div className="main">
+        <Hero />
+        <Bestsellers />
+      </div>
     </div>
   );
 }

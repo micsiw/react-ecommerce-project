@@ -10,6 +10,10 @@
   margin: 0;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 html,
 body {
   height: 100%;
@@ -45,4 +49,8 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+.main {
+  margin-top: 8vh;
 }
