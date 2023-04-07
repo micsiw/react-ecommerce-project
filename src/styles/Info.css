@@ -5,6 +5,7 @@
   scroll-margin-top: 8vh;
   display: flex;
   flex-direction: column;
+  padding: 4%;
 }
 
 .info-image {
