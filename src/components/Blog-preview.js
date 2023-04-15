@@ -79,7 +79,7 @@ function BlogPreview() {
               <div className="preview-article-image">
                 <img src={articleImage2} alt="woman with makeup"></img>
               </div>
-              <div class="preview-article-content">
+              <div className="preview-article-content">
                 <div className="preview-article-title">
                   OUR ADVICE HOW TO DETERMINE YOUR SKIN TYPE.
                 </div>
@@ -100,7 +100,7 @@ function BlogPreview() {
               <div className="preview-article-image">
                 <img src={articleImage3} alt="woman with makeup"></img>
               </div>
-              <div class="preview-article-content">
+              <div className="preview-article-content">
                 <div className="preview-article-title">
                   WHY MORNING ROUTINE IS SO IMPORTANT?
                 </div>
