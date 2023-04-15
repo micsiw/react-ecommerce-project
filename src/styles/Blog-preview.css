@@ -33,6 +33,7 @@
 
 .slider-wrapper > * {
   height: 100%;
+  z-index: 100;
 }
 
 .slick-list,

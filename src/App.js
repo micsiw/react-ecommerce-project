@@ -6,6 +6,7 @@ import Bestsellers from "./components/Bestsellers";
 import Info from "./components/Info";
 import Featured from "./components/Featured";
 import BlogPreview from "./components/Blog-preview";
+import Footer from "./components/Footer";
 
 function App() {
   // useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
         <Featured />
         <BlogPreview />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -41,7 +41,7 @@ function BlogPreview() {
           slidesToScroll: 1,
           dots: false,
           autoplay: true,
-          autoplaySpeed: 6000,
+          autoplaySpeed: 3500,
           pauseonHover: true,
           infinite: true,
         },
