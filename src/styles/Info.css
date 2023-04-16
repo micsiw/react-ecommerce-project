@@ -5,7 +5,7 @@
   scroll-margin-top: 8vh;
   display: flex;
   flex-direction: column;
-  padding: 4%;
+  padding: 3%;
 }
 
 .info-image {
@@ -32,13 +32,48 @@
 }
 
 .info-content-maxim {
+  font-style: italic;
   font-size: 0.85rem;
   font-weight: 400;
 }
 
 .info-content-description {
   font-size: 1.05rem;
-  text-justify: auto;
   text-align: center;
   margin-top: 10%;
+}
+
+@media screen and (min-width: 550px) {
+  .info-section {
+    padding: 2%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .info-section {
+    padding: 0;
+    flex-direction: row;
+  }
+
+  .info-image {
+    background-size: cover;
+  }
+
+  .info-content {
+    padding: 0;
+  }
+
+  .info-content-title {
+    font-size: 2.5rem;
+  }
+
+  .info-content-maxim {
+    font-size: 1.1rem;
+  }
+
+  .info-content-description {
+    font-size: 1.35rem;
+    margin: 0 23%;
+    margin-top: 7%;
+  }
 }
