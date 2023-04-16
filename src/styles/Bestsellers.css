@@ -30,3 +30,26 @@
   border: 1px solid black;
   padding: 5%;
 }
+
+@media screen and (min-width: 550px) {
+  .bestsellers-section {
+    padding: 6% 4%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .bestsellers-section {
+    padding: 2%;
+    padding-bottom: 5%;
+  }
+
+  .bestsellers-title {
+    font-size: 2.5rem;
+    margin-bottom: 3%;
+  }
+
+  .bestseller-products {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+  }
+}
