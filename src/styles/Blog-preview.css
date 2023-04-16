@@ -83,3 +83,23 @@
 .article-link {
   border-bottom: 1px solid black;
 }
+
+@media screen and (min-width: 550px) {
+  .blog-preview-section {
+    padding: 6% 4%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .blog-preview-section {
+    padding: 2%;
+  }
+
+  .blog-preview-title {
+    margin-bottom: 3%;
+  }
+
+  .slide-wrapper {
+    padding: 0 3%;
+  }
+}
