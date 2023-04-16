@@ -42,3 +42,30 @@
     background-position: left 60% bottom 20%;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .hero-content {
+    gap: 10%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .hero-section {
+    background-size: 150%;
+    background-position: left 60% bottom 54%;
+  }
+
+  .hero-content {
+    padding-bottom: 13%;
+    gap: 10%;
+  }
+
+  .hero-welcome {
+    font-size: 1.1rem;
+  }
+
+  .hero-motto {
+    font-size: 2.6rem;
+    max-width: 600px;
+  }
+}
