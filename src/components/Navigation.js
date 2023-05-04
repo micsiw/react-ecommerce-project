@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import "../styles/Header.css";
+import { Link } from "react-router-dom";
+import "../styles/Navigation.css";
 
-function Header() {
+function Navigation() {
   const ref = useRef();
 
   const [isNavActive, setNavActive] = useState(false);
@@ -35,8 +36,13 @@ function Header() {
             </li>
           </ul>
         </nav>
-        <h1 className="logo">GRN</h1>
-        <button className="cart-button">C</button>
+        <Link to="/" className="logo">
+          <h1 className="logo">GRN</h1>
+        </Link>
+
+        <Link to="/cart" className="cart-button">
+          <button>C</button>
+        </Link>
       </div>
     </div>
   );
@@ -59,4 +65,4 @@ function useOnClickOutside(ref, handler) {
   }, [ref, handler]);
 }
 
-export default Header;
+export default Navigation;
