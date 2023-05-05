@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import useOnClickOutside from "../utilities/useOnClickOutside";
 import { Link } from "react-router-dom";
+import { BsHandbag } from "react-icons/bs";
 import "../styles/Navigation.css";
 
 function Navigation() {
@@ -41,28 +43,12 @@ function Navigation() {
         </Link>
 
         <Link to="/cart" className="cart-button">
-          <button>C</button>
+          <BsHandbag id="cart-icon" />
+          <div className="cart-products">9</div>
         </Link>
       </div>
     </div>
   );
-}
-
-function useOnClickOutside(ref, handler) {
-  useEffect(() => {
-    const listener = (event) => {
-      if (!ref.current || ref.current.contains(event.target)) {
-        return;
-      }
-      handler(event);
-    };
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
-    return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-    };
-  }, [ref, handler]);
 }
 
 export default Navigation;

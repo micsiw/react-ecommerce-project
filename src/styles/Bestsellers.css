@@ -6,6 +6,7 @@
   padding: 3% 4%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .bestsellers-title {
@@ -64,6 +65,21 @@
   align-items: center;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.loading-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.add-cart-icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.add-cart-icon:hover {
+  transform: scale(1.15);
 }
 
 @media screen and (max-width: 375px) {

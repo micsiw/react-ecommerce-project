@@ -1,8 +1,7 @@
+import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 import Navigation from "./components/Navigation";
-
 import Footer from "./components/Footer";
-import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 
