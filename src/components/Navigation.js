@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { ShopContext } from "../contexts/shopContext";
 import useOnClickOutside from "../utilities/useOnClickOutside";
 import { Link } from "react-router-dom";
 import { BsHandbag } from "react-icons/bs";
@@ -6,8 +7,12 @@ import "../styles/Navigation.css";
 
 function Navigation() {
   const ref = useRef();
-
   const [isNavActive, setNavActive] = useState(false);
+  const { cartItems } = useContext(ShopContext);
+  const itemsInCart = cartItems.reduce(
+    (acc, current) => acc + current.quantity,
+    0
+  );
 
   useOnClickOutside(ref, () => setNavActive(false));
 
@@ -44,7 +49,9 @@ function Navigation() {
 
         <Link to="/cart" className="cart-button">
           <BsHandbag id="cart-icon" />
-          <div className="cart-products">9</div>
+          {cartItems.length > 0 && (
+            <div className="cart-products">{itemsInCart}</div>
+          )}
         </Link>
       </div>
     </div>

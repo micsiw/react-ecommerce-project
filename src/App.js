@@ -1,21 +1,25 @@
 import { Route, Routes } from "react-router-dom";
-import "./styles/App.css";
+import { ShopContextProvider } from "./contexts/shopContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 
+import "./styles/App.css";
+
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-        </Routes>
-      </div>
-      <Footer />
+      <ShopContextProvider>
+        <Navigation />
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+          </Routes>
+        </div>
+        <Footer />
+      </ShopContextProvider>
     </div>
   );
 }
