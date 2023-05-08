@@ -23,7 +23,7 @@ function Navigation() {
   return (
     <div className="header">
       <div className="header-bar">
-        <div className="burger" onClick={handleNavToggle}>
+        <div className="burger" onClick={handleNavToggle} tabIndex={0}>
           <div className="burger-first-line"></div>
           <div className="burger-second-line"></div>
         </div>

@@ -56,13 +56,14 @@ function Bestsellers() {
                       size="1.7rem"
                       title="add to cart"
                       className="add-cart-icon"
+                      tabIndex={0}
                       onClick={() =>
                         addToCart(
                           item.id,
                           item.name,
                           item.image_link,
                           item.price,
-                          item.category
+                          item.product_type
                         )
                       }
                     />

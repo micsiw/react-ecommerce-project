@@ -1,9 +1,9 @@
 .footer-section {
   height: 92vh;
   background-color: #49680c;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
   scroll-margin-top: 8vh;
-  margin-top: 8vh;
+  margin-top: 1px;
   padding: 10% 4%;
   padding-bottom: 1%;
   display: flex;
