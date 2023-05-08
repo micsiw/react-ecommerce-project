@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from "react";
-import { ShopContext } from "../contexts/shopContext";
+import { ShopContext } from "../contexts/ShopContext";
 import useOnClickOutside from "../utilities/useOnClickOutside";
 import { Link } from "react-router-dom";
 import { BsHandbag } from "react-icons/bs";
@@ -50,7 +50,7 @@ function Navigation() {
         <Link to="/cart" className="cart-button">
           <BsHandbag id="cart-icon" />
           {cartItems.length > 0 && (
-            <div className="cart-products">{itemsInCart}</div>
+            <div className="nav-cart-products">{itemsInCart}</div>
           )}
         </Link>
       </div>

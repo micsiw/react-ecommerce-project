@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { ShopContextProvider } from "./contexts/shopContext";
+import { ShopContextProvider } from "./contexts/ShopContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";

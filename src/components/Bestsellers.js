@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Oval } from "react-loader-spinner";
 import { IoBagAddOutline } from "react-icons/io5";
-import { ShopContext } from "../contexts/shopContext";
+import { ShopContext } from "../contexts/ShopContext";
 
 import "../styles/Bestsellers.css";
 
@@ -27,6 +27,8 @@ function Bestsellers() {
         itemsToDisplay.push(items[randomItemId]);
     }
 
+    console.log(itemsToDisplay);
+
     setItems(itemsToDisplay);
   };
 
@@ -49,12 +51,20 @@ function Bestsellers() {
                     {item.product_type.replace(/_/g, " ")}
                   </p>
                   <p className="product-price">
-                    {"$" + Number(item.price)}
+                    ${Number(item.price).toFixed(2)}
                     <IoBagAddOutline
                       size="1.7rem"
                       title="add to cart"
                       className="add-cart-icon"
-                      onClick={() => addToCart(item.id)}
+                      onClick={() =>
+                        addToCart(
+                          item.id,
+                          item.name,
+                          item.image_link,
+                          item.price,
+                          item.category
+                        )
+                      }
                     />
                   </p>
                 </div>

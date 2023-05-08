@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Oval } from "react-loader-spinner";
 import { IoBagAddOutline } from "react-icons/io5";
-import { ShopContext } from "../contexts/shopContext";
+import { ShopContext } from "../contexts/ShopContext";
 
 import "../styles/Featured.css";
 
@@ -48,7 +48,7 @@ function Featured() {
                     {item.product_type.replace(/_/g, " ")}
                   </p>
                   <p className="product-price">
-                    {"$" + Number(item.price)}
+                    ${Number(item.price).toFixed(2)}
                     <IoBagAddOutline
                       size="1.7rem"
                       title="add to cart"
