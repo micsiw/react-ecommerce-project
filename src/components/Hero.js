@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../styles/Hero.css";
 
 function Hero() {
@@ -8,7 +10,9 @@ function Hero() {
         <span className="hero-motto">
           BEAUTY LIVES INSIDE YOU, SHOW IT TO THE WORLD
         </span>
-        <button className="hero-button">Shop now</button>
+        <Link to="/shop">
+          <button className="hero-button">Shop now</button>
+        </Link>
       </div>
     </div>
   );

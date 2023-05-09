@@ -105,6 +105,7 @@
   .footer-wrapper {
     flex-direction: row-reverse;
     padding: 3%;
+    padding-left: 0;
   }
 
   .newsletter-signup {

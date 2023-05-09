@@ -30,16 +30,16 @@ function Navigation() {
         <nav ref={ref} className={`navigation ${isNavActive ? "active" : ""}`}>
           <ul>
             <li>
-              <a href="#">Products</a>
+              <Link to="/shop">Products</Link>
             </li>
             <li>
-              <a href="#">Bestsellers</a>
+              <Link to="/shop">Bestsellers</Link>
             </li>
             <li>
-              <a href="#">Blog</a>
+              <Link to="/blog">Blog</Link>
             </li>
             <li>
-              <a href="#">About us</a>
+              <Link to="/about">About us</Link>
             </li>
           </ul>
         </nav>

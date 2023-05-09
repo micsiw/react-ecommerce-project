@@ -57,7 +57,14 @@
   cursor: pointer;
 }
 
-.cart-quantity-button:focus {
+.cart-quantity-button:focus,
+.cart-remove-button:focus {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.cart-quantity-button:focus:not(:focus-visible),
+.cart-remove-button:focus:not(:focus-visible) {
   outline: none;
 }
 
@@ -67,10 +74,6 @@
   top: 0;
   right: -14px;
   opacity: 0.5;
-}
-
-.cart-remove-button:focus {
-  outline: none;
 }
 
 .cart-product-price {
