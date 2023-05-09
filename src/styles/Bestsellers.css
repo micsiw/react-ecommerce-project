@@ -37,7 +37,7 @@
 .bestseller-product > img,
 .product-info {
   width: 100%;
-  max-width: 260px;
+  max-width: 150px;
 }
 
 .product-info {
@@ -78,6 +78,10 @@
   transition: all 0.2s ease-in-out;
 }
 
+.add-cart-icon:focus {
+  outline: none;
+}
+
 .add-cart-icon:hover {
   transform: scale(1.15);
   cursor: pointer;
@@ -103,7 +107,7 @@
   .bestseller-product > img,
   .product-info {
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
   }
 }
 
@@ -121,6 +125,12 @@
   .bestseller-products {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
+  }
+
+  .bestseller-product > img,
+  .product-info {
+    width: 100%;
+    max-width: 250px;
   }
 
   .bestseller-product {
