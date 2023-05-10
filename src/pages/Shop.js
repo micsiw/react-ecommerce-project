@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
+
+import "../styles/Shop.css";
 
 let PageSize = 20;
 
@@ -37,18 +40,45 @@ function Shop() {
 
   return (
     <div className="shop-section">
-      <div>
-        {currentData.map((item) => {
-          return <p key={item.id}>{item.name}</p>;
-        })}
+      <div className="shop-product-list">
+        <div className="shop-product-display">
+          {currentData.map((item) => {
+            return (
+              <div className="shop-product" key={item.id}>
+                <img
+                  src={item.image_link}
+                  alt={item.name}
+                  className="shop-item-image"
+                ></img>
+                <div className="shop-info">
+                  <p className="shop-item-brand">{item.brand}</p>
+                  <p className="shop-item-name">{item.name}</p>
+                  <p className="shop-item-type">
+                    {item.product_type.replace(/_/g, " ")}
+                  </p>
+                  <Rating
+                    emptyStyle={{ display: "flex" }}
+                    fillStyle={{ display: "-webkit-inline-box" }}
+                    initialValue={item.rating}
+                    readonly={true}
+                    size={20}
+                  />
+                  <p className="shop-item-price">
+                    ${Number(item.price).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={items.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </div>
-      <Pagination
-        className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={items.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
     </div>
   );
 }

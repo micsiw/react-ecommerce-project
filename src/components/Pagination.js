@@ -26,7 +26,6 @@ const Pagination = (props) => {
     return keyCount++;
   };
 
-  // If there are less than 2 times in pagination range we shall not render the component
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
@@ -44,7 +43,6 @@ const Pagination = (props) => {
     <ul
       className={classnames("pagination-container", { [className]: className })}
     >
-      {/* Left navigation arrow */}
       <li
         key={getKey()}
         className={classnames("pagination-item", {
@@ -55,7 +53,6 @@ const Pagination = (props) => {
         <div className="arrow left" />
       </li>
       {paginationRange.map((pageNumber) => {
-        // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
           return (
             <li key={getKey()} className="pagination-item dots">
@@ -64,7 +61,6 @@ const Pagination = (props) => {
           );
         }
 
-        // Render our Page Pills
         return (
           <li
             key={getKey()}
@@ -77,7 +73,6 @@ const Pagination = (props) => {
           </li>
         );
       })}
-      {/*  Right Navigation arrow */}
       <li
         key={getKey()}
         className={classnames("pagination-item", {
