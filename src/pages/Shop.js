@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
+import image_placeholder from "../components/images/No-Image-Placeholder.png";
 
 import "../styles/Shop.css";
 
@@ -16,6 +17,10 @@ function Shop() {
   const lastPageIndex = firstPageIndex + PageSize;
   let currentData = items.slice(firstPageIndex, lastPageIndex);
 
+  const imageNotLoaded = (e) => {
+    e.target.src = image_placeholder;
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -28,7 +33,13 @@ function Shop() {
 
     const items = await data.json();
 
-    console.log(items);
+    // console.log(items);
+
+    // items[4].image_link.onError={() => }
+
+    // const fixedItems = items.filter((item) => !item.image_link.onerror);
+
+    // console.log(fixedItems);
 
     setItems(items);
     setLoading(false);
@@ -45,9 +56,11 @@ function Shop() {
           {currentData.map((item) => {
             return (
               <div className="shop-product" key={item.id}>
+                {console.log(item.image_link.onerror)}
                 <img
                   src={item.image_link}
                   alt={item.name}
+                  onError={imageNotLoaded}
                   className="shop-item-image"
                 ></img>
                 <div className="shop-info">
