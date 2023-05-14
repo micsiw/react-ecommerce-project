@@ -9,7 +9,7 @@
 }
 
 .info-image {
-  background-image: url(../components/images/info-photo.jpg);
+  background-image: url(../utilities/images/info-photo.jpg);
   background-size: 120%;
   background-position: center center;
   flex: 1;

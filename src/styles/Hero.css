@@ -1,6 +1,6 @@
 .hero-section {
   height: 92vh;
-  background-image: url(../components/images/hero-section.jpg);
+  background-image: url(../utilities/images/hero-section.jpg);
   background-repeat: no-repeat;
   background-size: 180%;
   background-position: 60% center;

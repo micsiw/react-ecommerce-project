@@ -3,9 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import "../styles/Blog-preview.css";
-import articleImage1 from "./images/article-photo-mobile-1.jpg";
-import articleImage2 from "./images/article-photo-mobile-2.jpg";
-import articleImage3 from "./images/article-photo-mobile-3.jpg";
+import articleImage1 from "../utilities/images/article-photo-mobile-1.jpg";
+import articleImage2 from "../utilities/images/article-photo-mobile-2.jpg";
+import articleImage3 from "../utilities/images/article-photo-mobile-3.jpg";
 
 function BlogPreview() {
   const settings = {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
-import image_placeholder from "../components/images/No-Image-Placeholder.png";
+import imagePlaceholder from "../utilities/placeholderImages";
 
 import "../styles/Shop.css";
 
@@ -18,12 +18,16 @@ function Shop() {
   let currentData = items.slice(firstPageIndex, lastPageIndex);
 
   const imageNotLoaded = (e) => {
-    e.target.src = image_placeholder;
+    e.target.src = imagePlaceholder[Math.floor(Math.random() * items.length)];
   };
 
   useEffect(() => {
     getProducts();
   }, []);
+
+  // useEffect(() => {
+  //   checkProducts();
+  // }, [items]);
 
   const getProducts = async () => {
     setLoading(true);
@@ -33,17 +37,27 @@ function Shop() {
 
     const items = await data.json();
 
-    // console.log(items);
+    console.log(items);
 
-    // items[4].image_link.onError={() => }
-
-    // const fixedItems = items.filter((item) => !item.image_link.onerror);
-
-    // console.log(fixedItems);
+    // console.log(items[4].image_link);
 
     setItems(items);
     setLoading(false);
   };
+
+  // const checkProducts = async () => {
+  //   const itemsList = await items;
+  //   console.log("itemsList!!: " + itemsList);
+
+  //   for (const item of itemsList) {
+  //     try {
+  //       const itemLink = await fetch(item.image_link);
+  //       console.log("try log: " + itemLink);
+  //     } catch (err) {
+  //       console.log("error log: " + err);
+  //     }
+  //   }
+  // };
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -56,7 +70,7 @@ function Shop() {
           {currentData.map((item) => {
             return (
               <div className="shop-product" key={item.id}>
-                {console.log(item.image_link.onerror)}
+                {/* {console.log(item.image_link.onerror)} */}
                 <img
                   src={item.image_link}
                   alt={item.name}
@@ -77,7 +91,9 @@ function Shop() {
                     size={20}
                   />
                   <p className="shop-item-price">
-                    ${Number(item.price).toFixed(2)}
+                    {item.price > 0
+                      ? "$" + Number(item.price).toFixed(2)
+                      : "Unavailable"}
                   </p>
                 </div>
               </div>
