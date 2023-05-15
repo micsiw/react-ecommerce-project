@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
 import imagePlaceholder from "../utilities/placeholderImages";
+import ShopSelect from "../components/ShopSelect";
 
 import "../styles/Shop.css";
 
@@ -11,52 +12,80 @@ function Shop() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filter, setFilter] = useState("products.json");
+  const [orderSelectedOption, setOrderSelectedOption] = useState("recommended");
   // const { addToCart } = useContext(ShopContext);
+
+  //
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
   let currentData = items.slice(firstPageIndex, lastPageIndex);
 
+  //placeholder for broken images
+
   const imageNotLoaded = (e) => {
-    e.target.src = imagePlaceholder[Math.floor(Math.random() * items.length)];
+    e.target.src =
+      imagePlaceholder[Math.floor(Math.random() * imagePlaceholder.length)];
   };
 
+  //fetch
+
   useEffect(() => {
-    getProducts();
-  }, []);
+    getProducts(filter);
+  }, [filter]);
 
-  // useEffect(() => {
-  //   checkProducts();
-  // }, [items]);
+  useEffect(() => {
+    // if (orderSelectedOption === "recommended") {
+    //   setFilter("products.json");
+    // }
+    // if (orderSelectedOption === "bestsellers") {
+    //   setFilter("products.json?rating_greater_than=4.8");
+    // }
+    if (orderSelectedOption === "alphabetical") {
+      console.log("alphabetical fired: ");
+    }
+    if (orderSelectedOption === "price-desc") {
+      setItems(items.sort((a, b) => b.price - a.price));
+      setCurrentPage(1);
+      console.log("desc fired");
+    }
+    if (orderSelectedOption === "price-asc") {
+      setItems(items.sort((a, b) => a.price - b.price));
+      setCurrentPage(1);
+      console.log("asc fired: ");
+    }
+  }, [orderSelectedOption]);
 
-  const getProducts = async () => {
+  const getProducts = async (filter) => {
     setLoading(true);
     const data = await fetch(
-      "http://makeup-api.herokuapp.com/api/v1/products.json"
+      `http://makeup-api.herokuapp.com/api/v1/${filter}`
     );
 
     const items = await data.json();
 
     console.log(items);
 
-    // console.log(items[4].image_link);
-
     setItems(items);
     setLoading(false);
   };
 
-  // const checkProducts = async () => {
-  //   const itemsList = await items;
-  //   console.log("itemsList!!: " + itemsList);
+  //order
 
-  //   for (const item of itemsList) {
-  //     try {
-  //       const itemLink = await fetch(item.image_link);
-  //       console.log("try log: " + itemLink);
-  //     } catch (err) {
-  //       console.log("error log: " + err);
-  //     }
-  //   }
+  // const filterStandard = () => {
+  //   setFilter("products.json");
+  // };
+
+  // const filterBestsellers = () => {
+  //   setFilter("products.json?rating_greater_than=4.8");
+  // };
+
+  // const sortAlphabetical = () => {
+  //   console.log("alpha items: " + items);
+  //   const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
+  //   console.log("aplhabetical fired " + sortedItems.id);
+  //   setItems(sortedItems);
   // };
 
   if (loading) {
@@ -65,12 +94,30 @@ function Shop() {
 
   return (
     <div className="shop-section">
+      <div className="shop-order-filter">
+        <ShopSelect
+          options={[
+            { value: "all", label: "All" },
+            { value: "alphabetical", label: "Alphabetical" },
+            { value: "price-desc", label: "Price High-Low" },
+            { value: "price-asc", label: "Price Low-High" },
+          ]}
+          orderSelectedOption={orderSelectedOption}
+          setOrderSelectedOption={setOrderSelectedOption}
+        ></ShopSelect>
+        {/* <select name="order" id="order">
+          <option value="recommended">Recommended</option>
+          <option value="bestsellers">Bestsellers</option>
+          <option value="alphabetical">Alphabetical</option>
+          <option value="price-desc">Price High-Low</option>
+          <option value="price-asc">Price Low-High</option>
+        </select> */}
+      </div>
       <div className="shop-product-list">
         <div className="shop-product-display">
           {currentData.map((item) => {
             return (
               <div className="shop-product" key={item.id}>
-                {/* {console.log(item.image_link.onerror)} */}
                 <img
                   src={item.image_link}
                   alt={item.name}
