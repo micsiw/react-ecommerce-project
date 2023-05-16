@@ -12,52 +12,61 @@ function Shop() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filter, setFilter] = useState("products.json");
+  const [currentData, setCurrentData] = useState([]);
+  const [filter, setFilter] = useState("products.json?price_greater_than=1");
   const [orderSelectedOption, setOrderSelectedOption] = useState("recommended");
   // const { addToCart } = useContext(ShopContext);
 
-  //
+  // pagination
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
-  let currentData = items.slice(firstPageIndex, lastPageIndex);
 
-  //placeholder for broken images
+  // placeholder for broken images
 
   const imageNotLoaded = (e) => {
     e.target.src =
       imagePlaceholder[Math.floor(Math.random() * imagePlaceholder.length)];
   };
 
-  //fetch
+  // fetch
 
   useEffect(() => {
-    getProducts(filter);
-  }, [filter]);
+    getProducts();
+  }, []);
 
   useEffect(() => {
-    // if (orderSelectedOption === "recommended") {
-    //   setFilter("products.json");
-    // }
-    // if (orderSelectedOption === "bestsellers") {
-    //   setFilter("products.json?rating_greater_than=4.8");
-    // }
+    setCurrentData(items.slice(firstPageIndex, lastPageIndex));
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (orderSelectedOption === "recommended") {
+      setFilter("products.json?price_greater_than=1");
+      getProducts();
+      console.log("rec fired");
+    }
     if (orderSelectedOption === "alphabetical") {
-      console.log("alphabetical fired: ");
+      setItems(
+        items.sort((a, b) =>
+          a.name.replace(/\s/g, "").localeCompare(b.name.replace(/\s/g, ""))
+        )
+      );
+      setCurrentPage(1);
+      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
     }
     if (orderSelectedOption === "price-desc") {
       setItems(items.sort((a, b) => b.price - a.price));
       setCurrentPage(1);
-      console.log("desc fired");
+      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
     }
     if (orderSelectedOption === "price-asc") {
       setItems(items.sort((a, b) => a.price - b.price));
       setCurrentPage(1);
-      console.log("asc fired: ");
+      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
     }
   }, [orderSelectedOption]);
 
-  const getProducts = async (filter) => {
+  const getProducts = async () => {
     setLoading(true);
     const data = await fetch(
       `http://makeup-api.herokuapp.com/api/v1/${filter}`
@@ -65,28 +74,10 @@ function Shop() {
 
     const items = await data.json();
 
-    console.log(items);
-
     setItems(items);
+    setCurrentData(items.slice(firstPageIndex, lastPageIndex));
     setLoading(false);
   };
-
-  //order
-
-  // const filterStandard = () => {
-  //   setFilter("products.json");
-  // };
-
-  // const filterBestsellers = () => {
-  //   setFilter("products.json?rating_greater_than=4.8");
-  // };
-
-  // const sortAlphabetical = () => {
-  //   console.log("alpha items: " + items);
-  //   const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
-  //   console.log("aplhabetical fired " + sortedItems.id);
-  //   setItems(sortedItems);
-  // };
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -97,7 +88,7 @@ function Shop() {
       <div className="shop-order-filter">
         <ShopSelect
           options={[
-            { value: "all", label: "All" },
+            { value: "recommended", label: "Recommended" },
             { value: "alphabetical", label: "Alphabetical" },
             { value: "price-desc", label: "Price High-Low" },
             { value: "price-asc", label: "Price Low-High" },
@@ -105,13 +96,6 @@ function Shop() {
           orderSelectedOption={orderSelectedOption}
           setOrderSelectedOption={setOrderSelectedOption}
         ></ShopSelect>
-        {/* <select name="order" id="order">
-          <option value="recommended">Recommended</option>
-          <option value="bestsellers">Bestsellers</option>
-          <option value="alphabetical">Alphabetical</option>
-          <option value="price-desc">Price High-Low</option>
-          <option value="price-asc">Price Low-High</option>
-        </select> */}
       </div>
       <div className="shop-product-list">
         <div className="shop-product-display">
