@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer, useCallback } from "react";
+import shopReducer, { INITIAL_STATE } from "../reducers/shopReducer";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
 import imagePlaceholder from "../utilities/placeholderImages";
@@ -9,18 +10,13 @@ import "../styles/Shop.css";
 let PageSize = 20;
 
 function Shop() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentData, setCurrentData] = useState([]);
-  const [filter, setFilter] = useState("products.json?price_greater_than=1");
-  const [orderSelectedOption, setOrderSelectedOption] = useState("recommended");
-  // const { addToCart } = useContext(ShopContext);
+  const [state, dispatch] = useReducer(shopReducer, INITIAL_STATE);
 
   // pagination
 
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = (state.currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
+  const currentData = state.items.slice(firstPageIndex, lastPageIndex);
 
   // placeholder for broken images
 
@@ -29,57 +25,40 @@ function Shop() {
       imagePlaceholder[Math.floor(Math.random() * imagePlaceholder.length)];
   };
 
-  // fetch
-
   useEffect(() => {
     getProducts();
   }, []);
 
   useEffect(() => {
-    setCurrentData(items.slice(firstPageIndex, lastPageIndex));
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (orderSelectedOption === "recommended") {
-      setFilter("products.json?price_greater_than=1");
+    if (state.orderSelectedOption === "recommended") {
+      dispatch({
+        type: "CHANGE_FILTER",
+        payload: "products.json?price_greater_than=1",
+      });
       getProducts();
-      console.log("rec fired");
     }
-    if (orderSelectedOption === "alphabetical") {
-      setItems(
-        items.sort((a, b) =>
-          a.name.replace(/\s/g, "").localeCompare(b.name.replace(/\s/g, ""))
-        )
-      );
-      setCurrentPage(1);
-      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
+
+    if (state.orderSelectedOption === "alphabetical") {
+      dispatch({ type: "LOAD_ORDER_ALPHABETICAL" });
     }
-    if (orderSelectedOption === "price-desc") {
-      setItems(items.sort((a, b) => b.price - a.price));
-      setCurrentPage(1);
-      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
+    if (state.orderSelectedOption === "price-desc") {
+      dispatch({ type: "LOAD_ORDER_PRICE_DESCENDING" });
     }
-    if (orderSelectedOption === "price-asc") {
-      setItems(items.sort((a, b) => a.price - b.price));
-      setCurrentPage(1);
-      setCurrentData(items.slice(firstPageIndex, lastPageIndex));
+    if (state.orderSelectedOption === "price-asc") {
+      dispatch({ type: "LOAD_ORDER_PRICE_ASCENDING" });
     }
-  }, [orderSelectedOption]);
+  }, [state.orderSelectedOption]);
 
   const getProducts = async () => {
-    setLoading(true);
+    dispatch({ type: "FETCH_START" });
     const data = await fetch(
-      `http://makeup-api.herokuapp.com/api/v1/${filter}`
+      `http://makeup-api.herokuapp.com/api/v1/${state.filter}`
     );
-
     const items = await data.json();
-
-    setItems(items);
-    setCurrentData(items.slice(firstPageIndex, lastPageIndex));
-    setLoading(false);
+    dispatch({ type: "FETCH_SUCCESS", payload: items });
   };
 
-  if (loading) {
+  if (state.loading) {
     return <h2>Loading...</h2>;
   }
 
@@ -93,8 +72,10 @@ function Shop() {
             { value: "price-desc", label: "Price High-Low" },
             { value: "price-asc", label: "Price Low-High" },
           ]}
-          orderSelectedOption={orderSelectedOption}
-          setOrderSelectedOption={setOrderSelectedOption}
+          orderSelectedOption={state.orderSelectedOption}
+          setOrderSelectedOption={(e) =>
+            dispatch({ type: "CHANGE_ORDER", payload: e })
+          }
         ></ShopSelect>
       </div>
       <div className="shop-product-list">
@@ -133,10 +114,13 @@ function Shop() {
         </div>
         <Pagination
           className="pagination-bar"
-          currentPage={currentPage}
-          totalCount={items.length}
+          currentPage={state.currentPage}
+          totalCount={state.items.length}
           pageSize={PageSize}
-          onPageChange={(page) => setCurrentPage(page)}
+          onPageChange={(page) =>
+            dispatch({ type: "CHANGE_PAGE", payload: page })
+          }
+          // onPageChange={(page) => setCurrentPage(page)}
         />
       </div>
     </div>

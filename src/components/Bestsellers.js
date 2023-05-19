@@ -27,8 +27,6 @@ function Bestsellers() {
         itemsToDisplay.push(items[randomItemId]);
     }
 
-    console.log(itemsToDisplay);
-
     setItems(itemsToDisplay);
   };
 

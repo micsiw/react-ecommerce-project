@@ -4,6 +4,7 @@ function ShopSelect({ options, orderSelectedOption, setOrderSelectedOption }) {
       value={orderSelectedOption}
       onChange={(e) => {
         setOrderSelectedOption(e.target.value);
+        console.log("order_changed " + e.target.value);
       }}
     >
       {options.map((o) => (
