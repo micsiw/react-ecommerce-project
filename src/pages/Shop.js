@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer, useCallback } from "react";
+import { useEffect, useReducer } from "react";
 import shopReducer, { INITIAL_STATE } from "../reducers/shopReducer";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
@@ -26,18 +26,24 @@ function Shop() {
   };
 
   useEffect(() => {
+    const getProducts = async () => {
+      dispatch({ type: "FETCH_START" });
+      const data = await fetch(
+        `http://makeup-api.herokuapp.com/api/v1/${state.filter}`
+      );
+      const items = await data.json();
+      dispatch({ type: "FETCH_SUCCESS", payload: items });
+    };
+
     getProducts();
-  }, []);
+  }, [state.filter]);
+
+  //wrzuc pierwszy fetch w useMemo (chyba)
 
   useEffect(() => {
     if (state.orderSelectedOption === "recommended") {
-      dispatch({
-        type: "CHANGE_FILTER",
-        payload: "products.json?price_greater_than=1",
-      });
-      getProducts();
+      dispatch({ type: "LOAD_ORDER_RECOMMENDED" });
     }
-
     if (state.orderSelectedOption === "alphabetical") {
       dispatch({ type: "LOAD_ORDER_ALPHABETICAL" });
     }
@@ -48,15 +54,6 @@ function Shop() {
       dispatch({ type: "LOAD_ORDER_PRICE_ASCENDING" });
     }
   }, [state.orderSelectedOption]);
-
-  const getProducts = async () => {
-    dispatch({ type: "FETCH_START" });
-    const data = await fetch(
-      `http://makeup-api.herokuapp.com/api/v1/${state.filter}`
-    );
-    const items = await data.json();
-    dispatch({ type: "FETCH_SUCCESS", payload: items });
-  };
 
   if (state.loading) {
     return <h2>Loading...</h2>;

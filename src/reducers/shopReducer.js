@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+  initialItems: [],
   items: [],
   loading: false,
   currentPage: 1,
@@ -17,6 +18,7 @@ const shopReducer = (state, action) => {
       return {
         ...state,
         loading: false,
+        initialItems: [...action.payload],
         items: action.payload,
       };
     case "CHANGE_FILTER":
@@ -29,6 +31,12 @@ const shopReducer = (state, action) => {
       return {
         ...state,
         orderSelectedOption: action.payload,
+      };
+    case "LOAD_ORDER_RECOMMENDED":
+      return {
+        ...state,
+        items: [...state.initialItems],
+        currentPage: 1,
       };
     case "LOAD_ORDER_ALPHABETICAL":
       return {
