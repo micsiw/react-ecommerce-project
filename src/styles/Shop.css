@@ -1,6 +1,6 @@
 .shop-section {
   min-height: 50vh;
-  background-color: rgb(247, 246, 246);
+  /* background-color: rgb(247, 246, 246); */
   scroll-snap-align: start;
   scroll-margin-top: 8vh;
   padding: 5% 4%;

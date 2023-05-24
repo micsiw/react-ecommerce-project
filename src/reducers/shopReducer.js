@@ -3,7 +3,7 @@ const INITIAL_STATE = {
   items: [],
   loading: false,
   currentPage: 1,
-  filter: "products.json?price_greater_than=1",
+  filter: "",
   orderSelectedOption: "recommended",
 };
 

@@ -1,16 +1,22 @@
 import { useEffect, useReducer } from "react";
+import { useLocation } from "react-router-dom";
 import shopReducer, { INITIAL_STATE } from "../reducers/shopReducer";
 import { Rating } from "react-simple-star-rating";
 import Pagination from "../components/Pagination";
 import imagePlaceholder from "../utilities/placeholderImages";
 import ShopSelect from "../components/ShopSelect";
+import ShopFilters from "../components/ShopFilters";
 
 import "../styles/Shop.css";
 
 let PageSize = 20;
 
 function Shop() {
-  const [state, dispatch] = useReducer(shopReducer, INITIAL_STATE);
+  const { filters } = useLocation().state;
+  const [state, dispatch] = useReducer(shopReducer, {
+    ...INITIAL_STATE,
+    filter: filters,
+  });
 
   // pagination
 
@@ -26,19 +32,22 @@ function Shop() {
   };
 
   useEffect(() => {
+    dispatch({ type: "CHANGE_FILTER", payload: filters });
+  }, [filters]);
+
+  useEffect(() => {
     const getProducts = async () => {
       dispatch({ type: "FETCH_START" });
       const data = await fetch(
         `http://makeup-api.herokuapp.com/api/v1/${state.filter}`
       );
       const items = await data.json();
+      console.log(items);
       dispatch({ type: "FETCH_SUCCESS", payload: items });
     };
 
     getProducts();
   }, [state.filter]);
-
-  //wrzuc pierwszy fetch w useMemo (chyba)
 
   useEffect(() => {
     if (state.orderSelectedOption === "recommended") {
@@ -61,6 +70,9 @@ function Shop() {
 
   return (
     <div className="shop-section">
+      <div className="shop-filters">
+        <ShopFilters />
+      </div>
       <div className="shop-order-filter">
         <ShopSelect
           options={[
@@ -81,7 +93,7 @@ function Shop() {
             return (
               <div className="shop-product" key={item.id}>
                 <img
-                  src={item.image_link}
+                  src={"http:" + item.api_featured_image}
                   alt={item.name}
                   onError={imageNotLoaded}
                   className="shop-item-image"
@@ -117,7 +129,6 @@ function Shop() {
           onPageChange={(page) =>
             dispatch({ type: "CHANGE_PAGE", payload: page })
           }
-          // onPageChange={(page) => setCurrentPage(page)}
         />
       </div>
     </div>

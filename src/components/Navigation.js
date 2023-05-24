@@ -30,10 +30,20 @@ function Navigation() {
         <nav ref={ref} className={`navigation ${isNavActive ? "active" : ""}`}>
           <ul>
             <li>
-              <Link to="/shop">Products</Link>
+              <Link
+                to="/shop/all"
+                state={{ filters: "products.json?price_greater_than=1" }}
+              >
+                Products
+              </Link>
             </li>
             <li>
-              <Link to="/shop">Bestsellers</Link>
+              <Link
+                to="/shop/bestsellers"
+                state={{ filters: "products.json?rating_greater_than=4.8" }}
+              >
+                Bestsellers
+              </Link>
             </li>
             <li>
               <Link to="/blog">Blog</Link>
