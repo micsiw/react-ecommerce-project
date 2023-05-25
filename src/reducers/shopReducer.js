@@ -20,6 +20,7 @@ const shopReducer = (state, action) => {
         loading: false,
         initialItems: [...action.payload],
         items: action.payload,
+        orderSelectedOption: "recommended",
       };
     case "CHANGE_FILTER":
       return {

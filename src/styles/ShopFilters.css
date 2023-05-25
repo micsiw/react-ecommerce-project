@@ -1,0 +1,27 @@
+.filter-type {
+  background-color: aliceblue;
+  border: 1px solid black;
+  height: 100%;
+}
+
+.filter-type p {
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 10px;
+}
+
+.filter-type:hover {
+  background-color: rgb(223, 232, 240);
+}
+
+.slick-slide > div {
+  margin: 0 8px;
+}
+
+.slick-list {
+  margin: 0 -8px;
+}
+
+.filters .filter-slider-wrapper {
+  padding: 20px 0px;
+}

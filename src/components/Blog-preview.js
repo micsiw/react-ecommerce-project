@@ -42,7 +42,7 @@ function BlogPreview() {
           dots: false,
           autoplay: true,
           autoplaySpeed: 3500,
-          pauseonHover: true,
+          pauseOnHover: true,
           infinite: true,
         },
       },
