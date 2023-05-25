@@ -71,7 +71,7 @@ function Shop() {
   return (
     <div className="shop-section">
       <div className="shop-filters">
-        <ShopFilters />
+        <ShopFilters items={state.items} />
       </div>
       <div className="shop-order-filter">
         <ShopSelect
