@@ -32,7 +32,7 @@ function Navigation() {
             <li>
               <Link
                 to="/shop/all"
-                state={{ filters: "products.json?price_greater_than=1" }}
+                state={{ filters: "products.json?price_greater_than=1&" }}
               >
                 Products
               </Link>
@@ -40,7 +40,7 @@ function Navigation() {
             <li>
               <Link
                 to="/shop/bestsellers"
-                state={{ filters: "products.json?rating_greater_than=4.8" }}
+                state={{ filters: "products.json?rating_greater_than=4.8&" }}
               >
                 Bestsellers
               </Link>

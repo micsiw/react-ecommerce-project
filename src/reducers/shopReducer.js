@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   loading: false,
   currentPage: 1,
   filter: "",
+  additionalFilters: "",
   orderSelectedOption: "recommended",
 };
 
@@ -32,6 +33,11 @@ const shopReducer = (state, action) => {
       return {
         ...state,
         orderSelectedOption: action.payload,
+      };
+    case "SET_ADDITIONAL_FILTERS":
+      return {
+        ...state,
+        additionalFilters: action.payload,
       };
     case "LOAD_ORDER_RECOMMENDED":
       return {

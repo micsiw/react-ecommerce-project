@@ -39,15 +39,16 @@ function Shop() {
     const getProducts = async () => {
       dispatch({ type: "FETCH_START" });
       const data = await fetch(
-        `http://makeup-api.herokuapp.com/api/v1/${state.filter}`
+        `http://makeup-api.herokuapp.com/api/v1/${state.filter}` +
+          `${state.additionalFilters}`
       );
       const items = await data.json();
-      console.log(items);
+      // console.log(items);
       dispatch({ type: "FETCH_SUCCESS", payload: items });
     };
 
     getProducts();
-  }, [state.filter]);
+  }, [state.filter, state.additionalFilters]);
 
   useEffect(() => {
     if (state.orderSelectedOption === "recommended") {
@@ -64,6 +65,10 @@ function Shop() {
     }
   }, [state.orderSelectedOption]);
 
+  const handleAdditionalFiltersChange = (additionalFilters) => {
+    dispatch({ type: "SET_ADDITIONAL_FILTERS", payload: additionalFilters });
+  };
+
   if (state.loading) {
     return <h2>Loading...</h2>;
   }
@@ -71,7 +76,10 @@ function Shop() {
   return (
     <div className="shop-section">
       <div className="shop-filters">
-        <ShopFilters items={state.items} />
+        <ShopFilters
+          items={state.items}
+          handleAdditionalFiltersChange={handleAdditionalFiltersChange}
+        />
       </div>
       <div className="shop-order-filter">
         <ShopSelect
