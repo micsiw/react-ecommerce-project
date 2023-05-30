@@ -39,11 +39,13 @@ function Shop() {
     const getProducts = async () => {
       dispatch({ type: "FETCH_START" });
       const data = await fetch(
-        `http://makeup-api.herokuapp.com/api/v1/${state.filter}` +
-          `${state.additionalFilters}`
+        `http://makeup-api.herokuapp.com/api/v1/${state.filter}${state.additionalFilters}`
       );
       const items = await data.json();
-      // console.log(items);
+      console.log(
+        "fetch call: " + state.filter + " " + state.additionalFilters
+      );
+      console.log(items);
       dispatch({ type: "FETCH_SUCCESS", payload: items });
     };
 
